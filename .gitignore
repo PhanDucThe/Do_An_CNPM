@@ -1,0 +1,47 @@
+# === Visual Studio / .NET ===
+
+# Tệp cache và cài đặt cá nhân của Visual Studio
+## Bỏ qua TẤT CẢ các thư mục .vs ở bất kỳ đâu
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Kết quả build (Build results)
+## Bỏ qua TẤT CẢ các thư mục bin và obj
+[Bb]in/
+[Oo]bj/
+
+# Tệp do Resharper (plugin) tạo ra
+_ReSharper*/
+*.[Rr]esharper
+
+# Gói NuGet (cho project kiểu cũ)
+[Pp]ackages/
+# Gói NuGet (cho project .NET Core / .NET 5+)
+# *.nupkg
+
+# Tệp database local (tránh đưa database cá nhân lên)
+*.mdf
+*.ldf
+App_Data/
+
+# Tệp do IIS Express tạo ra
+*.SCAst
+
+# Tệp log
+*.log
+*.vtt
+
+# Tệp môi trường (chứa mật khẩu, API key)
+.env
+*.secrets.json
+
+# Tệp cấu hình tạm
+*.config.user
+
+# === Môi trường JS (Nếu có dùng) ===
+node_modules/
+wwwroot/lib/
+*.lock.json
