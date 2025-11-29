@@ -1,0 +1,108 @@
+﻿@model quan_li_thuoc.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+    <style>
+        .card-body{
+            height:570px;
+            
+        }
+       form{
+           margin:0 auto;
+           width:260px; 
+        
+       }
+       
+    </style>
+   
+}
+
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-3 m-auto">
+                    <h3 class="text-center mb-4">Đăng ký</h3>
+
+                    
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger">@ViewBag.Error</div>
+                    }
+
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form" }))
+                    {
+                        
+                        <div class="form-group mb-3 ">
+                            @*<label for="full_name">Tên Đăng Ký</label>
+                            @Html.TextBox("full_name", null, new { @class = "form-control", placeholder = "Nhập  Tên Đăng Ký" })*@
+
+                            @Html.LabelFor(mode =>mode.full_name)
+                            @Html.EditorFor(model => model.full_name, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập Tên Tài Khoản" } })
+                            @Html.ValidationMessageFor(model => model.full_name, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group mb-3">
+                            @*<label for="email" >Email</label>
+                             @Html.TextBox("email", null, new { @class = "form-control", placeholder = "Nhập email" })*@
+                            @Html.LabelFor(model => model.email)
+                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập Email" } })
+                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="phone_number">Số điện thoại</label>
+                            @*@Html.TextBox("phone_number", null, new { @class = "form-control", placeholder = "Nhập số điện thoại" })*@
+                            @Html.LabelFor(model => model.phone_number )
+                            @Html.EditorFor(model => model.phone_number, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập Số Điện Thoại" } })
+                            @Html.ValidationMessageFor(model => model.phone_number, "", new { @class = "text-danger" })
+                        </div>
+
+
+                        <div class="form-group mb-3 position-relative">
+                            <label for="password">Mật khẩu</label>
+                            <div class="input-group">
+
+                                @*@Html.Password("password", null, new { @class = "form-control", placeholder = "Nhập mật khẩu", id = "password" })*@
+
+                                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập Mật Khẩu" } })
+
+                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+
+                                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                     
+
+
+                        <button type="submit" class="btn btn-success w-100">Đăng ký</button>
+                    }
+
+                    <div class="text-center mt-3">
+                        <a href="@Url.Action("Login","Account")">Đã có tài khoản? Đăng nhập</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const togglePassword = document.querySelector("#togglePassword");
+    const passwordInput = document.querySelector("#password");
+
+    togglePassword.addEventListener("click", function () {
+        const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+        passwordInput.setAttribute("type", type);
+
+        // Đổi icon con mắt
+        const icon = this.querySelector("i");
+        icon.classList.toggle("fa-eye");
+        icon.classList.toggle("fa-eye-slash");
+    });
+</script>

@@ -1,0 +1,86 @@
+﻿@model quan_li_thuoc.Models.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    <style>
+        
+        .card-body {
+            height:400px;
+            
+        }
+
+        form {
+            margin: 0 auto;
+            width: 260px;
+            height:260px;
+        }
+    </style>
+}
+
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-3 m-auto">
+                    <h3 class="text-center mb-4">Đăng nhập</h3>
+
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger">@ViewBag.Error</div>
+                    }
+
+                    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                    {
+                        <div class="form-group mb-3 ">
+                            @*<label>Email</label>
+                                @Html.TextBox("email", null, new { @class = "form-control", placeholder = "Nhập email" })*@
+                            @Html.LabelFor(m => m.email)
+                            @Html.TextBoxFor(m => m.email, new { @class = "form-control", placeholder = "Nhập email" })
+                            @Html.ValidationMessageFor(m => m.email, "", new { @class = "text-danger" })
+                        </div>
+
+
+                        <div class="form-group mb-3 position-relative">
+                            <label for="password">Mật khẩu</label>
+                            <div class="input-group">
+                                @*@Html.Password("password", null, new { @class = "form-control", placeholder = "Nhập mật khẩu", id = "password" })*@
+                                @Html.PasswordFor(m => m.password, new { @class = "form-control", placeholder = "Nhập mật khẩu", id = "password" })
+                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+
+                                @Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+                    }
+
+                    <div class="text-center mt-3">
+                        <a href="@Url.Action("Register","Account")">Chưa có tài khoản?</a> |
+                        <a href="@Url.Action("ForgotPassword","Account")">Quên mật khẩu?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const togglePassword = document.querySelector("#togglePassword");
+    const passwordInput = document.querySelector("#password");
+
+    togglePassword.addEventListener("click", function () {
+        const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+        passwordInput.setAttribute("type", type);
+
+        // Đổi icon con mắt
+        const icon = this.querySelector("i");
+        icon.classList.toggle("fa-eye");
+        icon.classList.toggle("fa-eye-slash");
+    });
+</script>
